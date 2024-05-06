@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class DivingScore {
+    float difficulty, judges1;
+    float highestScore, lowestScore;
+    float total, overallScore;
+    float sum = 0;
+    int level;
+    
+    public void calculateScore() {
+        Scanner key = new Scanner(System.in);
+    
+        // Enters the degree of difficulty 
+        System.out.println("Enter the level of difficulty:");
+        level = key.nextInt();
+        if (level >= 1.2 && level <= 3.8) {
+            // Enter seven judges' scores
+            float[] judgeScores = new float[7];
+            
+            // Enter the first judge's score 
+            System.out.println("Enter the first judge's score:");
+            judges1 = key.nextFloat();
+            
+            judgeScores[0] = judges1;
+            
+            // Enter the remaining six judges' scores
+            for (int i = 1; i < 7; i++) {
+                System.out.println("Enter the " + (i + 1) + "judge's score");
+                judgeScores[i] = key.nextFloat();
+            }
+            
+            // Find the highest score
+            highestScore = judgeScores[0];
+            for (int i = 1; i < 7; i++) {
+                if (judgeScores[i] > highestScore) {
+                    highestScore = judgeScores[i];
+                }
+            }
+            
+            // Find the lowest score
+            lowestScore = judgeScores[0];
+            for (int i = 1; i < 7; i++) {
+                if (judgeScores[i] < lowestScore) {
+                    lowestScore = judgeScores[i];
+                }
+            }
+        
+            // Calculate the total and the overall
+            total = (highestScore + lowestScore + sum) * level;
+            overallScore = total * 0.6;
+            
+            // Print the overall score for that dive
+            System.out.println("The overall score is: " + overallScore);
+        }
+        else {
+            System.out.println("Enten a valid point from 1.2 and 3.8 for level of difficulty.");   
+        }
+    }
+}   
+
+// (highest judges score + lowest judges score) + remaining judges score = sum
+// sum * level of difficulty = total 
+// total * 0.6 = diver's score 
